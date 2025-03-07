@@ -9,12 +9,16 @@ import (
 	"google.golang.org/grpc"
 )
 
+var users = map[string]*pb.User{}
+
 type server struct {
 	pb.UnimplementedUsersServer
 }
 
-func (s *server) SayHello(ctx context.Context, req *pb.UserRequest) (*pb.UserResponse, error) {
-	return &pb.UserResponse{Message: "Hello " + req.Name}, nil
+func (s *server) GetUser(ctx context.Context, req *pb.GetUserReq) (*pb.User, error) {
+	user_name
+	if 
+	return &pb.User{: "Hello " + req.Name}, nil
 }
 
 func main() {

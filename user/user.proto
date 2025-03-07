@@ -5,10 +5,24 @@ package user;
 option go_package = "github.com/SirishaGopigiri/sample-grpc-server/user";
 
 service Users {
-  rpc SayHello (UserRequest) returns (UserResponse);
+  rpc GetUser (GetUserReq) returns (User);
+  rpc GetUsers (EmptyRequest) returns (UserList);
+  rpc CreateUser (User) returns (UserResponse);
+  rpc UpdateUser (User) returns (UserResponse);
+  rpc DeleteUser (User) returns (UserResponse);
 }
 
-message UserRequest {
+message EmptyRequest {}
+
+message GetUserReq{
+  string name = 1;
+}
+
+message UserList {
+  repeated User users = 1;
+}
+
+message User {
   string name = 1;
   string email = 2;
   int32 age= 3;
