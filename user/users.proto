@@ -1,0 +1,19 @@
+syntax = "proto3";
+
+package user;
+
+option go_package = "github.com/SirishaGopigiri/sample-grpc-server";
+
+service Users {
+  rpc SayHello (UserRequest) returns (UserResponse);
+}
+
+message UserRequest {
+  string name = 1;
+  string email = 2;
+  int32 age= 3;
+}
+
+message UserResponse {
+  string message = 1;
+}
