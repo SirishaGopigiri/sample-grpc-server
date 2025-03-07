@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package user;
 
-option go_package = "github.com/SirishaGopigiri/sample-grpc-server";
+option go_package = "github.com/SirishaGopigiri/sample-grpc-server/user";
 
 service Users {
   rpc SayHello (UserRequest) returns (UserResponse);
