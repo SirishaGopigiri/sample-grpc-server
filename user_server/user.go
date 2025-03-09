@@ -16,7 +16,7 @@ type Server struct {
 	pb.UnimplementedUsersServer
 }
 
-func (s *Server) GetUser(ctx context.Context, req *pb.GetUserReq) (*pb.User, error) {
+func (s *Server) GetUser(ctx context.Context, req *pb.UserReq) (*pb.User, error) {
 	user_name := req.Name
 	if _, exists := users[user_name]; !exists {
 		error_str := fmt.Sprintf("user not found: %s", user_name)
@@ -53,7 +53,7 @@ func (s *Server) UpdateUser(ctx context.Context, req *pb.User) (*pb.UserResponse
 	return &pb.UserResponse{Message: "Successfully updated user"}, nil
 }
 
-func (s *Server) DeleteUser(ctx context.Context, req *pb.User) (*pb.UserResponse, error) {
+func (s *Server) DeleteUser(ctx context.Context, req *pb.UserReq) (*pb.UserResponse, error) {
 	if req.Name == "" {
 		return nil, status.Error(codes.InvalidArgument, "name cannot be empty")
 	} else if _, exists := users[req.Name]; !exists {
