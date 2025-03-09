@@ -10,6 +10,9 @@ service Users {
   rpc CreateUser (User) returns (UserResponse);
   rpc UpdateUser (User) returns (UserResponse);
   rpc DeleteUser (UserReq) returns (UserResponse);
+  rpc StreamResponse (UserReq) returns (stream UserResponse);
+  rpc StreamRequest(stream UserReq) returns (UserResponse);
+  rpc StreamReqResp(stream UserReq) returns (stream UserResponse);
 }
 
 message EmptyRequest {}
