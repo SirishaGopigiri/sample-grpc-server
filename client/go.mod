@@ -3,7 +3,7 @@ module example.com/client
 go 1.23.5
 
 require (
-	github.com/SirishaGopigiri/sample-grpc-server v0.0.0-20250307011934-4ebf50a89688 // indirect
+	github.com/SirishaGopigiri/sample-grpc-server v0.1.0 // indirect
 	golang.org/x/net v0.34.0 // indirect
 	golang.org/x/sys v0.29.0 // indirect
 	golang.org/x/text v0.21.0 // indirect

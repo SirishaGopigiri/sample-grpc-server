@@ -1,5 +1,7 @@
 github.com/SirishaGopigiri/sample-grpc-server v0.0.0-20250307011934-4ebf50a89688 h1:k0PYG9031uzlBIcwb/47KmNm/T94Q4QjawehfKtcdYY=
 github.com/SirishaGopigiri/sample-grpc-server v0.0.0-20250307011934-4ebf50a89688/go.mod h1:9tNRy5Pr/OJhYjJ8L5xFp55DvDNJD8xgGZntY+sDErE=
+github.com/SirishaGopigiri/sample-grpc-server v0.1.0 h1:6+GZALdWJK68jlFJraxj0rrrs9iJiR8zfj70xHuijNQ=
+github.com/SirishaGopigiri/sample-grpc-server v0.1.0/go.mod h1:9tNRy5Pr/OJhYjJ8L5xFp55DvDNJD8xgGZntY+sDErE=
 golang.org/x/net v0.34.0 h1:Mb7Mrk043xzHgnRM88suvJFwzVrRfHEHJEl5/71CKw0=
 golang.org/x/net v0.34.0/go.mod h1:di0qlW3YNM5oh6GqDGQr92MyTozJPmybPK4Ev/Gm31k=
 golang.org/x/sys v0.29.0 h1:TPYlXGxvx1MGTn2GiZDhnjPA9wZzZeGKHHmKhHYvgaU=
