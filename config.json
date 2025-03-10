@@ -1,0 +1,6 @@
+{
+  "host": "localhost",
+  "db_name": "golang-test",
+  "db_user": "postgres",
+  "db_password": "golang-test"
+}

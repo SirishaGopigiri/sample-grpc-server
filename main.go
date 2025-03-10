@@ -5,6 +5,7 @@ import (
 	"log"
 	"net"
 
+	"github.com/SirishaGopigiri/sample-grpc-server/database"
 	pb "github.com/SirishaGopigiri/sample-grpc-server/user"
 	user "github.com/SirishaGopigiri/sample-grpc-server/user_server"
 
@@ -21,13 +22,22 @@ func loggingInterceptor(
 }
 
 func main() {
+	ctx := context.Background()
+	config, err := database.LoadConfig("config.json")
+	if err != nil {
+		log.Fatalf("Error loading config: %v", err)
+	}
+	db, err := database.Connect_to_DB(ctx, config)
+	if err != nil {
+		log.Fatalf("failed to connect to db: %v", err)
+	}
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
 	s := grpc.NewServer(grpc.UnaryInterceptor(loggingInterceptor))
-	pb.RegisterUsersServer(s, &user.Server{})
+	pb.RegisterUsersServer(s, &user.Server{DB: db})
 
 	log.Println("Server is running on port 50051...")
 	if err := s.Serve(lis); err != nil {

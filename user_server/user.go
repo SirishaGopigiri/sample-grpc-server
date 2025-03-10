@@ -4,10 +4,13 @@ import (
 	"context"
 	"fmt"
 	"io"
+	"log"
 	"strconv"
 	"strings"
 
+	"github.com/SirishaGopigiri/sample-grpc-server/database"
 	pb "github.com/SirishaGopigiri/sample-grpc-server/user"
+	"gorm.io/gorm"
 
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
@@ -17,6 +20,7 @@ var users = map[string]*pb.User{}
 
 type Server struct {
 	pb.UnimplementedUsersServer
+	*gorm.DB
 }
 
 func (s *Server) GetUser(ctx context.Context, req *pb.UserReq) (*pb.User, error) {
@@ -29,9 +33,10 @@ func (s *Server) GetUser(ctx context.Context, req *pb.UserReq) (*pb.User, error)
 }
 
 func (s *Server) GetUsers(ctx context.Context, req *pb.EmptyRequest) (*pb.UserList, error) {
-	userslist := []*pb.User{}
-	for _, value := range users {
-		userslist = append(userslist, value)
+	userslist, err := database.GetUser(s.DB)
+	if err != nil {
+		log.Printf("error getting data from database")
+		return nil, status.Error(codes.NotFound, "error getting details from database")
 	}
 	return &pb.UserList{Users: userslist}, nil
 }
@@ -39,10 +44,12 @@ func (s *Server) GetUsers(ctx context.Context, req *pb.EmptyRequest) (*pb.UserLi
 func (s *Server) CreateUser(ctx context.Context, req *pb.User) (*pb.UserResponse, error) {
 	if req.Name == "" {
 		return nil, status.Error(codes.InvalidArgument, "name cannot be empty")
-	} else if _, exists := users[req.Name]; exists {
-		return nil, status.Error(codes.AlreadyExists, "user already exists, cannot create with same name")
 	}
-	users[req.Name] = req
+	err := database.CreateUser(s.DB, req)
+	if err != nil {
+		log.Printf("error getting data from database")
+		return nil, status.Error(codes.NotFound, "error getting details from database")
+	}
 	return &pb.UserResponse{Message: "Successfully created user"}, nil
 }
 
